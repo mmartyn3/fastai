@@ -1,0 +1,112 @@
+Lecture 2 questionnaire
+
+(If you're not sure of the answer to a question, try watching the next lesson and then coming back to this one, or read the first two chapters of the book.)
+
+Can we always use a random sample for a validation set? Why or why not?
+
+
+What is overfitting? Provide an example.
+Overfitting is measured by looking at the metrics on the validation set. Overfitting is when you apply a "good" model to unseen data, the model will perform badly due to "memorising" the training data points.
+An example is leaning what 1 cat looks like vs. generating a model that 
+An example is resnet34 (image recognition model). This model contains 34 layers which is a good tradeoff between speed of training the model to your data vs. overfitting your model. If you increased to a ResNet100 model with 100 layers, the model is more complex and may produce more accurate predictions but it also runs the risk of fitting to your test data too well and performing poorly on unseen data.
+
+What is a metric? How does it differ from "loss"?
+These are very closely related with a sutble difference. Metric is the thing that engineers care about, whereas loss is the thing that the computer uses as the measure of performance when deciding to alter the models paramters.
+A metric is a function that measures quality of the model's predictions using the validation set (e.g. error_rate, accuracy) and will be printed at the end of each epoch (examples include error_rate. Its purpose is to tell the engineer what percentage of images in the validation set are being classified incorrectly e.g. the model thinks in your dataset of 10 images that 4 are dogs and 6 are cats. Accuuracy is defined as 1.0 - error_rate. 
+Loss is a performance measurement that shows you how well the model is working at a minute level. The big difference between a "metric" and "loss" is that if you slightly tweak you model's parameters, the metric might not change (i.e. number of dog vs. cat classifications) but the "loss" will change.
+
+Name the 3 datasets.
+Training (80% of data) - used by the model to learn the best params 
+Validation (20% of data) - used to give a reading of how well the model performs on unseen data
+Test (10% of data) - used at the end of a project to evaluate the models final perform
+
+Creating Validation datasets.
+if the data is timeseries, you need to chop off the most recent data to store as validation & test datasets. Otherwise the model will simply fill in the missing datapoints that we plucked out as validation/test
+
+Give an exmaple of a pretrained model.
+ResNet34
+
+What is transfer learning?
+Using a pretrained model for a task different to what it was originally trained for. It allows you to start with a model that was trained on a huge dataset (e.g. ImageNet) then you can train that model on your specific task to get better results than starting with a blank model and only training on your smaller specific dataset. This act of training on a different task to change the weights of an existing model is called fine tuning.
+
+What is an epoch?
+A loop where every image in the training set has been looked at once during model training  
+
+What is the "head" of a model?
+
+
+What kinds of features do the early layers of a CNN find? How about the later layers?
+The first layer identifiers minute features. Each subsequent layer in the NN can use multiple examples from the previous layer to form more specific identifications. E.g. the first layer might identify lines and the colour orange in an image. The second layer might identify semi-circles and different shades of orange. The third layer might piece that together and put it with all the other similar images in a sunset category 
+layer1 - horizontal lines, diagnoganl lines, colours
+layer2 - circles (eyes), multiple lines (shower curtains, wheat), corners (windows), semi-circles (rocks, planetaryrings), blotchy colours (sunsets), wavey lines (fabrics)
+layer3 - repeated geometric patterns (honeycomb, lattice), text (barcodes, book covers)
+layer4 - dog faces, bird legs
+layer5 - specific breeds of dog
+
+Are image models only useful for photos?
+NO. You are able to turn sounds into photos which can then be run through a model trained on image data such as ResNet34
+
+what is a model?
+Combination of architecture and paramters
+
+What is an "architecture"?
+Template of the model that we're trying to fit; the actual math function that we're passing the input data and parameters to
+
+What is catascrophic forgetting?
+During transfer learning the model beigns to "forget" the weights required to be good at the task it was originally trained on. In order to keep the original functionality, you would need to keep examples of the original training dataset in the new training set. 
+
+What is segmentation?
+
+
+What is y_range used for? When do we need it?
+
+
+What are "hyperparameters"?
+
+
+What's the best way to avoid failures when using AI in an organization?
+
+
+What is a p value?
+
+
+What is a prior?
+Rather than starting with a Null hyopthesis, we analyse previous data to say which outcome is more likely. 
+
+Provide an example of where the bear classification model might work poorly in production, due to structural or style differences in the training data.
+
+
+Where do text models currently have a major deficiency?
+
+
+What are possible negative societal implications of text generation models?
+
+
+In situations where a model might make mistakes, and those mistakes could be harmful, what is a good alternative to automating a process?
+
+
+What kind of tabular data is deep learning particularly good at?
+
+
+What's a key downside of directly using a deep learning model for recommendation systems?
+
+
+What are the steps of the Drivetrain Approach?
+
+
+How do the steps of the Drivetrain Approach map to a recommendation system?
+
+
+Create an image recognition model using data you curate, and deploy it on the web.
+
+
+What is DataLoaders?
+Grabs a few images at a time (64 images) i.e. a batch, and passes all 64 images to the GPU to train on at a time. This speeds up the training process a lot
+
+What four things do we need to tell fastai to create DataLoaders?
+
+
+What does the splitter parameter to DataBlock do?
+
+
+How do we ensure a random split always gives the same validation set?
